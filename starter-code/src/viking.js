@@ -74,16 +74,27 @@ War.prototype.vikingAttack = function(){
 
 	var message = currentSaxon.receiveDamage(currentViking.strength);
 
-	var newSaxonHealth = currentSaxon.health;
-
-	if(newSaxonHealth <= 0) {
-		var newSaxonArmy = this.saxonArmy.splice(saxonPosition, 1);
+	if(currentSaxon.health <= 0) {
+		this.saxonArmy.splice(saxonPosition, 1);
 	}
 
 	return message;
 };
 
-War.prototype.saxonAttack = function(){};
+War.prototype.saxonAttack = function(){
+	var vikingPosition = Math.floor(Math.random() * this.vikingArmy.length);
+	var currentViking = this.vikingArmy[vikingPosition];
+	var currentSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)];
+
+	var message = currentViking.receiveDamage(currentSaxon.strength);
+
+	if(currentViking.health <= 0) {
+		this.vikingArmy.splice(vikingPosition, 1);
+	}
+
+	return message;
+};
+
 War.prototype.showStatus = function(){};
 
 var war1 = new War();
