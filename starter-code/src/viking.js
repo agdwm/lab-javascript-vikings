@@ -63,7 +63,33 @@ War.prototype.addViking = function(viking) {
 	this.vikingArmy.push(viking);
 };
 
-War.prototype.addSaxon = function(){};
-War.prototype.vikingAttack = function(){};
+War.prototype.addSaxon = function(saxon){
+	this.saxonArmy.push(saxon);
+};
+
+War.prototype.vikingAttack = function(){
+	var currentSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)];
+	var currentViking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)];
+
+	var newSaxonHealth = currentSaxon.receiveDamage(currentViking.strength);
+	return newSaxonHealth;
+};
+
 War.prototype.saxonAttack = function(){};
 War.prototype.showStatus = function(){};
+
+var war1 = new War();
+
+var harald = new Viking('Harld', 400, 50);
+var drakar = new Viking('Drakar', 400, 50);
+
+var sason = new Saxon(100, 50);
+var weak = new Saxon(100, 100);
+
+war1.addViking(harald);
+war1.addViking(drakar);
+
+war1.addSaxon(sason);
+war1.addSaxon(weak);
+
+war1.vikingAttack();
