@@ -2,12 +2,10 @@
 function Soldier (health, strength) {
 	this.health = health;
 	this.strength = strength;
+}
 
-	this.receiveDamage = function(damage) {
-		var currentHealth = this.health;
-		var newHealth = currentHealth - damage;
-		this.health = newHealth;
-	}
+Soldier.prototype.receiveDamage = function(damage) {
+	this.health = this.health - damage;
 }
 
 Soldier.prototype.attack = function() {
