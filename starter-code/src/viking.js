@@ -2,22 +2,41 @@
 function Soldier (health, strength) {
 	this.health = health;
 	this.strength = strength;
-}
 
-Soldier.prototype.receiveDamage = function(damage) {
-	this.health = this.health - damage;
+	this.receiveDamage = function(damage) {
+		this.health = this.health - damage;
+	}
 }
 
 Soldier.prototype.attack = function() {
 	return this.strength;
 }
 
-var soldier1 = new Soldier(100, 50);
-soldier1.receiveDamage(10);
-
-
 // Viking
-function Viking() {}
+function Viking (name, health, strength) {
+	Soldier.call(this, health, strength);
+	this.name = name;
+
+	this.receiveDamage = function(damage) {
+		this.health = this.health - damage;
+		var message;
+		if(this.health > 0) {
+			message = this.name + " has received " + damage + " points of damage";
+		}else{
+			message = this.name + " has died in act of combat";
+		}
+		return message;
+	}
+}
+
+var harald = new Viking('Harald', 400, 200);
+
+
+Viking.prototype = Object.create(Soldier.prototype);
+
+Viking.prototype.battleCry = function() {
+
+}
 
 // Saxon
 function Saxon() {}
