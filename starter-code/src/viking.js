@@ -76,8 +76,8 @@ War.prototype.vikingAttack = function(){
 
 	if(currentSaxon.health <= 0) {
 		this.saxonArmy.splice(saxonPosition, 1);
+		this.showStatus();
 	}
-
 	return message;
 };
 
@@ -90,25 +90,17 @@ War.prototype.saxonAttack = function(){
 
 	if(currentViking.health <= 0) {
 		this.vikingArmy.splice(vikingPosition, 1);
+		this.showStatus();
 	}
-
 	return message;
 };
 
-War.prototype.showStatus = function(){};
-
-var war1 = new War();
-
-var harald = new Viking('Harld', 400, 50);
-var drakar = new Viking('Drakar', 400, 50);
-
-var sason = new Saxon(100, 50);
-var weak = new Saxon(100, 100);
-
-war1.addViking(harald);
-war1.addViking(drakar);
-
-war1.addSaxon(sason);
-war1.addSaxon(weak);
-
-war1.vikingAttack();
+War.prototype.showStatus = function() {
+	if (this.saxonArmy.length === 0) {
+		return "Vikings have won the war of the century!";
+	} else if(this.vikingArmy.length === 0) {
+		return "Saxons have fought for their lives and survive another day...";
+	} else {
+		return "Vikings and Saxons are still in the thick of battle.";
+	}
+};
