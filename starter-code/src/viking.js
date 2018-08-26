@@ -28,18 +28,29 @@ function Viking (name, health, strength) {
 		return message;
 	}
 }
-
-var harald = new Viking('Harald', 400, 200);
-
-
 Viking.prototype = Object.create(Soldier.prototype);
 
 Viking.prototype.battleCry = function() {
-
+	return "Odin Owns You All!";
 }
 
+
 // Saxon
-function Saxon() {}
+function Saxon(health, strength) {
+	Soldier.call(this, health, strength);
+
+	this.receiveDamage = function(damage) {
+		this.health = this.health - damage;
+		var message;
+		if(this.health > 0) {
+			message = "A Saxon has received " + damage + " points of damage";
+		}else{
+			message = "A Saxon has died in combat";
+		}
+	}
+}
+Saxon.prototype = Object.create(Soldier.prototype);
+
 
 // War
 function War() {}
